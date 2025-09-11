@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import { Author } from "../models/author";
 
-let authors: Author[] = [];
+export let authors: Author[] = [
+  { id: 1, name: "Rachel Hollis" },
+  { id: 2, name: "Rhonda Byrne" }
+];
 
 export const getAllAuthors = (req:Request, res:Response) => {
   res.status(200).json(authors);
