@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Book } from "../models/books";
 import { authors } from "./author";
 
-let books: Book[] = [
+export let books: Book[] = [
   { id: 1, authorId:1, title: "Introduction to Algorithms", year: 2022 },
   { id: 2, authorId: 2, title: "Javascript:The Good Parts", year: 2008 }
 ];
