@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import { body, param, validationResult } from "express-validator";
 import { getAllBooks, getBookById, addBook, updateBook, deleteBook } from "../controllers/books";
 
@@ -10,13 +10,13 @@ bookRouter.get(
   "/:id",
   [param("id").isInt().withMessage("ID must be an integer")],
 
-  (req: Request, res: Response) => {
+  (req: Request, res: Response, next:NextFunction) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    getBookById(req, res);
+    getBookById(req, res, next);
   }
 );
 
@@ -29,13 +29,13 @@ bookRouter.post(
     body("year").isInt().withMessage("Year is required and must be an integer")
   ],
 
-  (req: Request, res: Response) => {
+  (req: Request, res: Response, next:NextFunction) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    addBook(req, res);
+    addBook(req, res, next);
   }
 );
 
@@ -50,13 +50,13 @@ bookRouter.put(
 ),
   ],
 
-  (req: Request, res: Response) => {
+  (req: Request, res: Response, next:NextFunction) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    updateBook(req, res);
+    updateBook(req, res, next);
   }
 );
 
@@ -65,13 +65,13 @@ bookRouter.delete(
   "/:id",
   [param("id").isInt().withMessage("ID must be an integer")],
 
-  (req: Request, res: Response) => {
+  (req: Request, res: Response, next:NextFunction) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    deleteBook(req, res);
+    deleteBook(req, res, next);
   }
 );
 
