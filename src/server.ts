@@ -4,6 +4,7 @@ import { loggerMiddleware } from './middleware/logger';
 import router from './routes/author';
 import bookRouter from './routes/books';
 import { errorHandler } from './middleware/errorHandler';
+import { notFoundHandler } from './middleware/notFoundHandler';
 
 const app: Express = express();
 
@@ -15,6 +16,8 @@ app.use(loggerMiddleware);
 
 app.use("/authors", router);
 app.use("/books", bookRouter);
+
+app.use(notFoundHandler);
 
 app.use(errorHandler);
 
