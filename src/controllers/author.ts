@@ -29,6 +29,7 @@ export const getAuthorById = (req:Request, res:Response, next:NextFunction) => {
 
     if(!author){
     return next({ status: 404, message: "Author not found" })
+
   }
 
   res.status(200).json(author)
@@ -61,7 +62,6 @@ export const addAuthor = (req:Request, res:Response, next:NextFunction) => {
 
 export const updateAuthor = (req: Request, res: Response, next:NextFunction) => {
   try {
-
   const { id } = req.params;
   const { name } = req.body;
 
@@ -69,6 +69,7 @@ export const updateAuthor = (req: Request, res: Response, next:NextFunction) => 
 
    if (!author) {
     return next({ status: 404, message: "Author not found" });
+
   }
 
   if (name) author.name = name;
