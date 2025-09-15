@@ -50,6 +50,14 @@ export const addBook = (req: Request, res: Response, next:NextFunction) => {
     return next({ status:400, message:"Invalid authorId: no author found with this ID." });
   }
 
+  const duplicateBook = books.find(
+      b => b.title.toLowerCase() === title.toLowerCase() && b.authorId === authorId
+    );
+    
+    if (duplicateBook) {
+      return next({ status: 409, message: "Book already exists for this author" });
+    }
+
   const newBook: Book = { id: books.length + 1, authorId, title, year };
   books.push(newBook);
 
